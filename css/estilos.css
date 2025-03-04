@@ -1,33 +1,100 @@
+/* Definición de variables */
+:root {
+    --fondo-claro: #f4f4f4;
+    --texto-claro: black;
+    --fondo-oscuro: #1e1e1e;
+    --texto-oscuro: white;
+
+    --tarjeta-clara: white;
+    --tarjeta-oscura: #333;
+
+    --boton-claro: #3498db;
+    --boton-claro-hover: #2980b9;
+    --boton-oscuro: #f39c12;
+    --boton-oscuro-hover: #e67e22;
+
+    --sombra-clara: rgb(0 0 0 / 0.2);
+    --sombra-oscura: rgb(255 255 255 / 0.2);
+}
+
 /* Estilos base */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--fondo-claro);
+    color: var(--texto-claro);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    color-scheme: light dark;
+    flex-direction: column;
+}
+
+/* Botón de modo oscuro */
+.boton-tema {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.boton-tema:active {
+    transform: rotate(180deg);
+}
+
+/* Modo oscuro */
+.modo-oscuro {
+    background-color: var(--fondo-oscuro);
+    color: var(--texto-oscuro);
+}
+
+.modo-oscuro .contenedor-dado {
+    background: var(--tarjeta-oscura);
+    color: var(--texto-oscuro);
+    box-shadow: 0 4px 8px var(--sombra-oscura);
+}
+
+.modo-oscuro .titulo-dado {
+    color: var(--texto-oscuro);
+}
+
+.modo-oscuro .cara-dado {
+    color: var(--texto-oscuro);
+}
+
+.modo-oscuro .boton-lanzar {
+    background: var(--boton-oscuro);
+    color: black;
+}
+
+.modo-oscuro .boton-lanzar:hover {
+    background: var(--boton-oscuro-hover);
 }
 
 /* Contenedor principal */
-.dice-simulator {
-    background: white;
+.contenedor-dado {
+    background: var(--tarjeta-clara);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px var(--sombra-clara);
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.dice-simulator__title {
+.titulo-dado {
     font-size: 24px;
-    color: #333;
+    color: var(--texto-claro);
 }
 
 /* Contenedor del dado */
-.dice-simulator__display {
+.display-dado {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,22 +102,22 @@ body {
 }
 
 /* Carácter del dado */
-.dice-simulator__face {
+.cara-dado {
     font-size: 50px;
     transition: transform 0.3s ease-in-out;
 }
 
 /* Botón */
-.dice-simulator__button {
+.boton-lanzar {
     padding: 10px 20px;
     font-size: 18px;
     border: none;
-    background: #3498db;
+    background: var(--boton-claro);
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.dice-simulator__button:hover {
-    background: #2980b9;
+.boton-lanzar:hover {
+    background: var(--boton-claro-hover);
 }
