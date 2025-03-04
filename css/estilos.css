@@ -1,0 +1,56 @@
+/* Estilos base */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.dice-simulator {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dice-simulator__title {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Contenedor del dado */
+.dice-simulator__display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+/* Carácter del dado */
+.dice-simulator__face {
+    font-size: 50px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Botón */
+.dice-simulator__button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dice-simulator__button:hover {
+    background: #2980b9;
+}
