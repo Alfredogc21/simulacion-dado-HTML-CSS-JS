@@ -7,6 +7,8 @@
 
     --tarjeta-clara: white;
     --tarjeta-oscura: #333;
+    
+    --degradado-claro: linear-gradient(#fff 50%, #c0c0c0 100%, #f4f4f4 100%);
 
     --boton-claro: #3498db;
     --boton-claro-hover: #2980b9;
@@ -17,11 +19,11 @@
     --sombra-oscura: rgb(255 255 255 / 0.2);
 }
 
-/* Estilos base */
 body {
     font-family: Arial, sans-serif;
-    background-color: var(--fondo-claro);
-    color: var(--texto-claro);
+    background-image: linear-gradient(135deg, #080808df 0%, #000000df 100%), url("../imagenes/fondoDados.jpg");
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,14 +51,14 @@ body {
 
 /* Modo oscuro */
 .modo-oscuro {
-    background-color: var(--fondo-oscuro);
+    background-image: linear-gradient(135deg, #080808ec 0%, #000000f7 100%), url("../imagenes/fondoDados.jpg");
     color: var(--texto-oscuro);
 }
 
 .modo-oscuro .contenedor-dado {
     background: var(--tarjeta-oscura);
     color: var(--texto-oscuro);
-    box-shadow: 0 4px 8px var(--sombra-oscura);
+    box-shadow: 0 1px 8px var(--tarjeta-clara);
 }
 
 .modo-oscuro .titulo-dado {
@@ -69,7 +71,7 @@ body {
 
 .modo-oscuro .boton-lanzar {
     background: var(--boton-oscuro);
-    color: black;
+    color: rgb(45, 45, 45);
 }
 
 .modo-oscuro .boton-lanzar:hover {
@@ -78,7 +80,9 @@ body {
 
 /* Contenedor principal */
 .contenedor-dado {
-    background: var(--tarjeta-clara);
+    width: 80%;
+    height: 600px;
+    background-image: var(--degradado-claro);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px var(--sombra-clara);
@@ -86,11 +90,16 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin: 20px 0px 20px 0px;
 }
 
 .titulo-dado {
     font-size: 24px;
     color: var(--texto-claro);
+    font-family: "Nosifer", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-shadow: 0px 0px 12px rgba(70, 131, 180, 0.719);
 }
 
 /* Contenedor del dado */
@@ -107,8 +116,15 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 /* Botón */
 .boton-lanzar {
+    width: 20%;
     padding: 10px 20px;
     font-size: 18px;
     border: none;
@@ -120,4 +136,10 @@ body {
 
 .boton-lanzar:hover {
     background: var(--boton-claro-hover);
+}
+
+@media screen and (max-width: 700px) {
+    .contenedor-dado {
+        width: 70%;
+    }
 }
