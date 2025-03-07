@@ -94,7 +94,7 @@ body {
 }
 
 .titulo-dado {
-    font-size: 24px;
+    font-size: 2rem;
     color: var(--texto-claro);
     font-family: "Nosifer", sans-serif;
     font-weight: 400;
