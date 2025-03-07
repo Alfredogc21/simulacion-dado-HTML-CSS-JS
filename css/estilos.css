@@ -1,36 +1,187 @@
-/* Definición de variables */
+/* Variables de color */
 :root {
     --fondo-claro: #f4f4f4;
-    --texto-claro: black;
+    --texto-claro: #222;
     --fondo-oscuro: #1e1e1e;
-    --texto-oscuro: white;
-
-    --tarjeta-clara: white;
+    --texto-oscuro: #fff;
+    --tarjeta-clara: #ffffff;
     --tarjeta-oscura: #333;
-    
-    --degradado-claro: linear-gradient(#fff 50%, #c0c0c0 100%, #f4f4f4 100%);
-
     --boton-claro: #3498db;
     --boton-claro-hover: #2980b9;
-    --boton-oscuro: #f39c12;
-    --boton-oscuro-hover: #e67e22;
-
-    --sombra-clara: rgb(0 0 0 / 0.2);
-    --sombra-oscura: rgb(255 255 255 / 0.2);
+    --boton-oscuro: #64d054;
+    --boton-oscuro-hover: #52b346;
+    --sombra-clara: rgba(0, 0, 0, 0.2);
+    --sombra-oscura: rgba(255, 255, 255, 0.2);
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-image: linear-gradient(135deg, #080808df 0%, #000000df 100%), url("../imagenes/fondoDados.jpg");
+    background-image: linear-gradient(135deg, rgba(8, 8, 8, 0.87) 0%, rgba(0, 0, 0, 0.87) 100%), url("../imagenes/fondoDados.jpg");
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+    padding: 20px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+/* Modo oscuro */
+.modo-oscuro {
+    background: var(--fondo-oscuro);
+    color: var(--texto-oscuro);
+}
+
+.modo-oscuro .contenedor-dado {
+    background: var(--tarjeta-oscura);
+    box-shadow: 0 4px 8px var(--sombra-oscura);
+}
+
+/* Contenedor principal */
+.contenedor-dado {
+    width: 90%;
+    max-width: 800px;
+    background: var(--tarjeta-clara);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px var(--sombra-clara);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: background 0.3s;
+    margin: 0 auto;
+}
+
+/* Título */
+.titulo-dado {
+    font-size: 1.8rem;
+    font-family: "Nosifer", sans-serif;
+    text-shadow: 0px 0px 10px rgba(70, 131, 180, 0.5);
+}
+
+/* Configuración */
+.configuracion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 80px;
+    text-align: center;
+}
+
+/* Botones */
+button {
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Botón de iniciar partida */
+.boton-iniciar {
+    background: var(--boton-claro);
+    color: white;
+}
+
+.boton-iniciar:hover {
+    background: var(--boton-claro-hover);
+}
+
+/* Mensaje de confeti */
+.mensaje-confeti {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 50px;
+    border-radius: 8px;
+    font-size: 40px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
+
+
+/* Botón de lanzar dado */
+.boton-lanzar {
+    background: var(--boton-oscuro);
+    color: white;
+    font-size: 18px;
+    width: 100%;
+}
+
+.boton-lanzar:hover {
+    background: var(--boton-oscuro-hover);
+}
+
+.boton-lanzar:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Dado */
+.display-dado {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    color-scheme: light dark;
-    flex-direction: column;
+    height: 120px;
+}
+
+
+
+.cara-dado {
+    font-size: 100px;
+    display: inline-block;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Resultados */
+.resultados {
+    text-align: left;
+}
+
+.resultados h2 {
+    text-align: center;
+}
+
+#resultadoContador {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#resultadoContador li {
+    width: 30%;
+    padding: 5px;
+    background: #eee;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Modo oscuro ajustes */
+.modo-oscuro #resultadoContador li {
+    background: #444;
+    color: white;
 }
 
 /* Botón de modo oscuro */
@@ -41,105 +192,14 @@ body {
     background: transparent;
     border: none;
     font-size: 24px;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
 }
 
-.boton-tema:active {
-    transform: rotate(180deg);
-}
-
-/* Modo oscuro */
-.modo-oscuro {
-    background-image: linear-gradient(135deg, #080808ec 0%, #000000f7 100%), url("../imagenes/fondoDados.jpg");
-    color: var(--texto-oscuro);
-}
-
-.modo-oscuro .contenedor-dado {
-    background: var(--tarjeta-oscura);
-    color: var(--texto-oscuro);
-    box-shadow: 0 1px 8px var(--tarjeta-clara);
-}
-
-.modo-oscuro .titulo-dado {
-    color: var(--texto-oscuro);
-}
-
-.modo-oscuro .cara-dado {
-    color: var(--texto-oscuro);
-}
-
-.modo-oscuro .boton-lanzar {
-    background: var(--boton-oscuro);
-    color: rgb(45, 45, 45);
-}
-
-.modo-oscuro .boton-lanzar:hover {
-    background: var(--boton-oscuro-hover);
-}
-
-/* Contenedor principal */
-.contenedor-dado {
-    width: 80%;
-    height: 600px;
-    background-image: var(--degradado-claro);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px var(--sombra-clara);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 20px 0px 20px 0px;
-}
-
-.titulo-dado {
-    font-size: 2rem;
-    color: var(--texto-claro);
-    font-family: "Nosifer", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    text-shadow: 0px 0px 12px rgba(70, 131, 180, 0.719);
-}
-
-/* Contenedor del dado */
-.display-dado {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-}
-
-/* Carácter del dado */
-.cara-dado {
-    font-size: 100px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.botones {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-/* Botón */
-.boton-lanzar {
-    width: 20%;
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    background: var(--boton-claro);
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.boton-lanzar:hover {
-    background: var(--boton-claro-hover);
-}
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 500px) {
     .contenedor-dado {
-        width: 70%;
+        width: 95%;
+    }
+
+    #resultadoContador li {
+        width: 45%;
     }
 }

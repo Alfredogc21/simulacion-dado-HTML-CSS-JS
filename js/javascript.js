@@ -2,41 +2,103 @@ document.addEventListener("DOMContentLoaded", () => {
     const caraDado = document.getElementById("caraDado");
     const botonLanzar = document.getElementById("botonLanzar");
     const botonTema = document.getElementById("botonTema");
+    const iniciarPartida = document.getElementById("iniciarPartida");
+    const numLanzamientos = document.getElementById("numLanzamientos");
+    const numeroSeleccionado = document.getElementById("numeroSeleccionado");
     const body = document.body;
 
-    // Caras del dado con emojis
-    const carasDado = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+    const contadores = {
+        "1": document.getElementById("contador1"),
+        "2": document.getElementById("contador2"),
+        "3": document.getElementById("contador3"),
+        "4": document.getElementById("contador4"),
+        "5": document.getElementById("contador5"),
+        "6": document.getElementById("contador6"),
+    };
 
-    // Comprobar el tema guardado en localStorage
+    const carasDado = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+    let lanzamientosRestantes = 0;
+
+    // Comprobar el tema guardado
     if (localStorage.getItem("modoOscuro") === "true") {
         body.classList.add("modo-oscuro");
         botonTema.textContent = "☀️";
     }
 
-    botonLanzar.addEventListener("click", () => {
-        caraDado.style.transform = "rotate(360deg)";
-        
-        setTimeout(() => {
-            caraDado.style.transform = "rotate(0deg)";
-            const indiceAleatorio = Math.floor(Math.random() * 6);
-            caraDado.textContent = carasDado[indiceAleatorio];
-        }, 300);
+    // Actualizar número de lanzamientos en tiempo real
+    numLanzamientos.addEventListener("input", () => {
+        numeroSeleccionado.textContent = numLanzamientos.value;
     });
 
-    // Evento para cambiar el tema
-    botonTema.addEventListener("click", () => {
-        const esModoOscuro = body.classList.toggle("modo-oscuro");
+    // Iniciar partida
+    iniciarPartida.addEventListener("click", () => {
+        let cantidad = parseInt(numLanzamientos.value);
+        if (isNaN(cantidad) || cantidad < 1) {
+            alert("Ingresa un número válido de lanzamientos.");
+            return;
+        }
 
-        // Guardar en localStorage
-        localStorage.setItem("modoOscuro", esModoOscuro);
+        lanzamientosRestantes = cantidad;
 
-        // Cambia el ícono de luna a sol y viceversa
-        botonTema.textContent = esModoOscuro ? "☀️" : "🌙";
+        // Resetear contadores
+        for (let i = 1; i <= 6; i++) {
+            contadores[i.toString()].textContent = "0";
+        }
 
-        // Rotar el icono
-        botonTema.style.transform = "rotate(180deg)";
+        botonLanzar.disabled = false;
+        mostrarConfeti(`Seleccionaste el número ${cantidad}`);
+    });
+
+    // Mostrar mensaje con confeti
+    function mostrarConfeti(mensaje) {
+        const mensajeDiv = document.createElement("div");
+        mensajeDiv.classList.add("mensaje-confeti");
+        mensajeDiv.innerHTML = `🎉 ${mensaje} 🎉`;
+
+        document.body.appendChild(mensajeDiv);
+
         setTimeout(() => {
-            botonTema.style.transform = "rotate(0deg)";
-        }, 300);
+            mensajeDiv.remove();
+        }, 3000);
+    }
+
+    // Lanzar dado con animación
+    botonLanzar.addEventListener("click", () => {
+        if (lanzamientosRestantes > 0) {
+            caraDado.style.transition = "transform 0.5s ease-in-out";
+            caraDado.style.transform = "rotate(720deg) scale(0.5)";
+
+            setTimeout(() => {
+                let resultado = Math.floor(Math.random() * 6) + 1;
+                caraDado.textContent = carasDado[resultado - 1];
+
+                // Resetear transformación
+                caraDado.style.transform = "rotate(0deg) scale(1)";
+
+                // Incrementar contador
+                contadores[resultado.toString()].textContent =
+                    parseInt(contadores[resultado.toString()].textContent) + 1;
+
+                lanzamientosRestantes--;
+
+                if (lanzamientosRestantes === 0) {
+                    botonLanzar.disabled = true;
+                    mostrarConfeti("¡Partida terminada!");
+                }
+            }, 500);
+        }
+    });
+
+    // Cambiar tema
+    botonTema.addEventListener("click", () => {
+        body.classList.toggle("modo-oscuro");
+
+        if (body.classList.contains("modo-oscuro")) {
+            botonTema.textContent = "☀️";
+            localStorage.setItem("modoOscuro", "true");
+        } else {
+            botonTema.textContent = "🌙";
+            localStorage.setItem("modoOscuro", "false");
+        }
     });
 });
