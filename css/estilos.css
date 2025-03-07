@@ -112,7 +112,7 @@ body {
 
 /* Carácter del dado */
 .cara-dado {
-    font-size: 50px;
+    font-size: 100px;
     transition: transform 0.3s ease-in-out;
 }
 
