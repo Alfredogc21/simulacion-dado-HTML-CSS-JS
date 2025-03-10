@@ -81,6 +81,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 lanzamientosRestantes--;
 
+                // Mostrar conteo en la consola
+                console.log("Conteo de lanzamientos:", {
+                    "1": contadores["1"].textContent,
+                    "2": contadores["2"].textContent,
+                    "3": contadores["3"].textContent,
+                    "4": contadores["4"].textContent,
+                    "5": contadores["5"].textContent,
+                    "6": contadores["6"].textContent
+                });
+
+                // Asignamos el valor de los contadores a las variables
+                carasN1 = contadores["1"].textContent;
+                carasN2 = contadores["2"].textContent;
+                carasN3 = contadores["3"].textContent;
+                carasN4 = contadores["4"].textContent;
+                carasN5 = contadores["5"].textContent;
+                carasN6 = contadores["6"].textContent;                
+
                 if (lanzamientosRestantes === 0) {
                     botonLanzar.disabled = true;
                     mostrarConfeti("¡Partida terminada!");
